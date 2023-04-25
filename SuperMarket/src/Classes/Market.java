@@ -6,27 +6,31 @@ import java.util.List;
 import Interfaces.iActorBehaviour;
 import Interfaces.iMarketBehaviour;
 import Interfaces.iQueueBehaviour;
-
+/** класс магазин. Имплементирует интерфейсы */
 public class Market implements iMarketBehaviour,iQueueBehaviour{
-    //private List<Actor> queue;
+   /** список клиентов в магазине. Приватный(инкапсуляция) */
     private List<iActorBehaviour> queue;
 
+    /** конструктор класса */
     public Market() {
         this.queue = new ArrayList<iActorBehaviour>();
     }
 
+    /** переопределение метода: Клиент зашел в магазин */
     @Override
     public void acceptToMarket(iActorBehaviour actor) {
         System.out.println(actor.getActor().getName()+" клиент пришел в магазин ");
         takeInQueue(actor);
     }
 
+    /** переопределение метода: клиент встал в очередь */
     @Override
     public void takeInQueue(iActorBehaviour actor) {
         this.queue.add(actor);
         System.out.println(actor.getActor().getName()+" клиент добавлен в очередь ");
     }
 
+    /** переопределение метода: клиент покинул магазин */
     @Override
     public void releaseFromMarket(List<Actor> actors) {
         for(Actor actor:actors)
@@ -36,7 +40,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour{
         }
         
     }
-
+    /** переопределение метода: обновление данных. */
     @Override
     public void update() {
        takeOrder();
@@ -44,6 +48,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour{
        releaseFromQueue();
     }
 
+    /** переопределение метода: заказ получен */
     @Override
     public void giveOrder() {
         for(iActorBehaviour actor: queue)
@@ -56,7 +61,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour{
         }
         
     }
-
+    /** переопределение метода: клиент покинул очередь */
     @Override
     public void releaseFromQueue() {
        List<Actor> releaseActors = new ArrayList<>();
@@ -73,7 +78,7 @@ public class Market implements iMarketBehaviour,iQueueBehaviour{
     }
 
 
-
+    /** переопределение метода: Клиент сделвл заказ */
     @Override
     public void takeOrder() {
         for(iActorBehaviour actor:queue)

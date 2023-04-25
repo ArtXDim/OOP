@@ -1,10 +1,17 @@
 package Interfaces;
 
-import Classes.Actor;
-
+/** интерфейс Очереди */
 public interface iQueueBehaviour {
+    /** клиент  попал в очередь */
     void takeInQueue(iActorBehaviour actor);
+
+    /** клиент покинул очередь */
     void releaseFromQueue();
-    void takeOrder();
+
+    /** клиент сделал заказ */
     void giveOrder();
+
+    /** клиент получил заказ */
+    void takeOrder();
+    
 }
